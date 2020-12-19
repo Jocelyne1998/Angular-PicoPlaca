@@ -1,13 +1,13 @@
 <h1>Hoy no circula</h1>
-<form #formData = "ngForm">
+<form #formData = "ngForm" ngNativeValidate>
     <p>
         Plate: <input type="text" name="plate" ngModel required>
     </p>
     <p>
-        Date: <input type="date" name="date" ngModel>
+        Date: <input type="date" name="date" ngModel required>
     </p>
     <p>
-        Hour: <input type="datetime" name="hour" ngModel>
+        Hour: <input type="datetime" name="hour" ngModel required>
     </p>
     <p>
         <input type="submit" value="Enviar" (click)="plateAction(formData)">

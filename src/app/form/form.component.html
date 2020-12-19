@@ -1,0 +1,16 @@
+<h1>Hoy no circula</h1>
+<form #formData = "ngForm" ngNativeValidate>
+    <p>
+        Plate: <input type="text" name="plate" ngModel required pattern="[a-zA-Z0-9]+[0-9]{1}$">
+    </p>
+    <p>
+        Date: <input type="date" name="date" ngModel required>
+    </p>
+    <p>
+        Hour: <input type="time" name="hour" ngModel required>
+    </p>
+    <p>
+        <input type="submit" value="Enviar" (click)="plateAction(formData)">
+        <input type="reset" value="Borrar" (click)="formData.reset()">
+    </p>
+</form>

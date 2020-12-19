@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "Angular-PicoPlaca"
+  "defaultProject": "Angular-PicoPlaca",
+  "cli": {
+    "analytics": "23e33330-efb0-4b91-b692-7b22327ad872"
+  }
 }

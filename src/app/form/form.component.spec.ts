@@ -29,12 +29,19 @@ describe('FormComponent', () => {
   });
 });
 
-describe('Test for hour', () => {
+fdescribe('Test for hour', () => {
   const component = new FormComponent();
-  const hours = new Date();
-  hours.setHours(8);
+  it('should return a false because 20:00 PM is not inside the PicoPlaca time', () => {
+    expect(component.isOnSchedule('20:00')).toEqual(false);
+  });
   it('should return a true because 8:00 AM is inside the PicoPlaca time', () => {
-    expect(component.isOnSchedule(hours)).toEqual(true);
+    expect(component.isOnSchedule('8:00')).toEqual(true);
+  });
+  it('should return a false because 5:00 AM is not inside the PicoPlaca time', () => {
+    expect(component.isOnSchedule('5:00')).toEqual(false);
+  });
+  it('should return a true because 16:00 PM is inside the PicoPlaca time', () => {
+    expect(component.isOnSchedule('16:00')).toEqual(true);
   });
 });
 

@@ -12,8 +12,6 @@ import * as moment from 'moment';
 export class FormComponent {
 
   constructor() { }
-
-
   isValid(plateLastNumber: number, dayWeek: number): boolean {
     switch (plateLastNumber) {
       case 1:
@@ -42,16 +40,10 @@ export class FormComponent {
     return getLastChar;
   }
 
-  isOnSchedule(hour: Date): boolean {
-    const hours7 = new Date();
-    hours7.setHours(7, 0);
-    const hours9 = new Date();
-    hours9.setHours(9, 30);
-    const hours16 = new Date();
-    hours16.setHours(16, 0);
-    const hours17 = new Date();
-    hours17.setHours(17, 30);
-    return ((hour >= hours7 && hour <= hours9) || (hour >= hours16 && hour <= hours17));
+  isOnSchedule(hourToCheck: string): boolean {
+    const h = moment(hourToCheck, 'h:mm');
+    return ((h.isAfter(moment('6:59', 'h:mm')) && h.isBefore(moment('9:31', 'h:mm'))) ||
+      (h.isAfter(moment('15:59', 'h:mm')) && h.isBefore(moment('17:31', 'h:mm'))));
   }
 
   isDayAllowed(dayWeek: number): boolean {
@@ -68,10 +60,7 @@ export class FormComponent {
       const lastNumber = this.returnLastChar(plateForm.plate);
       const date = new Date(plateForm.date);
       const dayWeek = 1 + (+date.getDay());
-      const hour1 = moment('8:45', 'h:mm');
-      const hour2 = moment(plateForm.hour, 'h:mm');
-      console.log(hour1.isBefore(hour2)); // deberá aparecer true
-      if (this.isOnSchedule(plateForm.hour) && !this.isDayAllowed(dayWeek)){
+      if (this.isOnSchedule(plateForm.hour.toString()) && !this.isDayAllowed(dayWeek)){
         this.isValid(lastNumber, dayWeek) ? alert('Can be circulated') : alert('Can not circulate');
       } else {
         alert('Can be circulate');
